@@ -1,0 +1,42 @@
+*{
+    padding: 0;
+    margin: 0;
+    /* height: 100vh; */
+  }
+body{
+    background-color: #DDC8B1;
+}
+
+#logo 
+{
+    width: 6rem;
+}
+
+#idProfile 
+{
+    width: 50px;
+    height: 50px;
+}
+
+#p{
+    width: 80rem;
+    height: 30rem;
+}
+
+
+/* start card */
+.card {
+  padding: 1rem;
+  background-color: rgb(243, 243, 243);
+  
+  }
+  .card-title {
+    font-weight:bold;
+    text-align: center;
+  }
+
+
+.cards
+{
+  width: 19rem;
+}
