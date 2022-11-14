@@ -80,30 +80,34 @@ include('views/scripte.php');
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body p-5">
+      <div class="modal-body p-3">
         <!-- content model -->
         <form action="Home.php" method="post" id="formTask">
-          <div class=" mb-5">
+          <div class=" mb-3">
             <input type="text" class="form-control" id="title" name="title" required placeholder="Title">
           </div>
-          <div class=" mb-5">
+          <div class=" mb-3">
             <input type="text" class="form-control" id="author" name="author" required placeholder="Author">
           </div>
-          <div class=" mb-5">
+          <div class=" mb-3">
             <input type="text" class="form-control" id="state" name="state" required placeholder="state the book">
           </div>
-          <div class=" mb-5">
+          <div class=" mb-3">
             <input type="date" class="form-control" id="date" name="date" required>
           </div>
 
-          <select class="form-select mb-5" id="language" name="languge"  required>
+          <select class="form-select mb-3" id="language" name="languge"  required>
             <option selected >Choose the language of the book</option>
             <option value="1">Arab</option>
             <option value="2">Français</option>
             <option value="3">English</option>
           </select>
-          <div class="">
+          <div class="mb-3">
             <input type="number" class="form-control" id="price" name="price" required placeholder="Price">
+          </div>
+          <div class="mb-3 d-flex align-items-center">
+          <label for="formFile" class="form-label me-3 ">Choose a picture : </label>
+            <input class="form-control align-text-center" type="file" id="formFile" style="width: 9rem;">
           </div>
           <!-- end content model -->
         </div>
@@ -115,6 +119,10 @@ include('views/scripte.php');
     </div>
   </div>
 </div>
+
+
+
+
 
 
 

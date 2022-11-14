@@ -1,0 +1,14 @@
+body
+{
+    
+        background-image: url(../../images/BackLogin.png);
+         height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+} 
+
+.card
+{
+    background-color: #DDC8B1;
+}

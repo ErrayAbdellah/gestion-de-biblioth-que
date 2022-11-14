@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/styles/loginStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Lbrary</title>
+    <link rel="stylesheet" href="assets/styles/loginStyle.css">
     
 </head>
-<body style="background-color: #DDC8B1;"> 
-    <section class="vh-100" >
+<body> 
+    <section class="vh-100 " >
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-6">
@@ -53,5 +53,6 @@
       </div>
     </div>
 </section>
+
 </body>
 </html>

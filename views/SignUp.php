@@ -11,7 +11,7 @@
     <title>Lbrary</title>
     
 </head>
-<body style="background-color: #DDC8B1;"> 
+<body > 
     <section class="vh-100" >
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">

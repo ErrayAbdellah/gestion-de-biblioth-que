@@ -95,6 +95,7 @@ function getBooks()
                 </div>
                 </div>          
             </div>
+            
             <?php
     }
 }
