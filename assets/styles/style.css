@@ -38,5 +38,7 @@ body{
 
 .cards
 {
-  width: 19rem;
+  width: 18rem;
+  height:27rem;
+   background-color: blue;
 }

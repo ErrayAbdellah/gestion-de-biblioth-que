@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
+
+
 <?php 
 $con = mysqli_connect("localhost" , "root" , "" ,"library");
 $qry =mysqli_query($GLOBALS['con'] ,  "SELECT b.* , l.name as 'language' FROM books b INNER JOIN languag l on  l.id = b.LanguagID ");
@@ -8,7 +21,7 @@ session_start();
 if(isset($_POST['signIn']))         signIn() ;
 if(isset($_POST['signUp']))         signUp() ;
 if(isset($_POST['addNewBook']))     addNewBook() ;
-if(isset($_POST['delet']))     delete() ;
+if(isset($_POST['delete']))     delete() ;
 
 
 function signIn()
@@ -46,7 +59,7 @@ function addNewBook()
     $author     = $_POST['author'];
     $state      = $_POST['state'];
     $date       = $_POST['date'];
-    $language    = $_POST['languge'];
+    $language   = $_POST['languge'];
     $price      = $_POST['price'];
     $qry = "INSERT INTO books(title, author, state, dateBook, LanguagID, price) VALUES ('$title','$author','$state','$date',$language,'$price')" ;
     mysqli_query($GLOBALS['con'],$qry);
@@ -87,15 +100,13 @@ function getBooks()
                 </div>
                 <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden>
                 <div class="card-footer d-flex justify-content-between">
-                    <input type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" value ="Delete">
-                    <input type="submit" name="delete" value="hhhh">
+                    <input type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" name="delete" value ="Delete">
                     <button type="button" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link"
                     onclick="getBook(<?php echo $id ;?>, '<?php echo $title ; ?>' , '<?php echo $author ;?>' , <?php echo $row['LanguagID'] ;?> , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>)"
                     >Update</button>
                 </div>
                 </div>          
             </div>
-            
             <?php
     }
 }
@@ -103,11 +114,11 @@ function getBooks()
 
 function delete()
 {
-    $id = $_POST['bookID'];
     echo "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
-    $qry = "DELETE FROM `books` WHERE id = ".$id ;
-    mysqli_query($GLOBALS['con'],$qry);
-    header('location: Home.php');
+    // $id = $_POST['bookID'];
+    // $qry = "DELETE FROM `books` WHERE id = ".$id ;
+    // mysqli_query($GLOBALS['con'],$qry);
+    // header('location: Home.php');
     
 }
 ?>

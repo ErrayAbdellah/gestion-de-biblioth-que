@@ -3,17 +3,7 @@ include('views/scripte.php');
 
 
 ?> 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/styles/style.css">
-</head>
+
 <body>
     <nav class="navbar">
         <div class="container-fluid">
@@ -30,8 +20,9 @@ include('views/scripte.php');
         </div>
       
         <div class="px-5 pt-5">
-          <input type="text" class="bg-white border-0 rounded-pill " style="width: 20rem; height: 2.5rem;" placeholder="Search" >
-          <button type="submit" class=" rounded-pill">Search</button>
+          <input type="text" class="bg-white border-0 rounded-pill " style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
+
+          <input type="submit" class=" rounded-pill" value="Search">
         </div>
 
       </div>
@@ -42,9 +33,9 @@ include('views/scripte.php');
       <hr>
        <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 ">
 
-        <?php getBooks() ; ?>
+        <?php echo getBooks() ; ?>
 
-
+      <input type="submit" value="ccccc">
         <!-- <div class="cards ">
           <div class="card shadow rounded-3">
             <div class="p-auto d-flex justify-content-center" style="height: 10rem ;">
