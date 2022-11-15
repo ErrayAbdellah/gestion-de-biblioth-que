@@ -3,26 +3,83 @@ include('views/scripte.php');
 
 
 ?> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
 
 <body>
-    <nav class="navbar">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="images/Logo_.png" alt="" width="100" class="d-inline-block align-text-center">
-        </a>
-        <img src="images/profile.jpg" alt="" id="idProfile"  class="align-items-end rounded-circle">
+
+
+      <!-- ****************************Navbar****************************** -->
+      <nav class="navbar navbar-expand-lg shadow" style="height: 4rem; ">
+        <div class="container-fluid ">
+          <div class="">
+            <a class="navbar-brand" href="#">
+              <img src="images/Logo_.png" alt="" width="100" height="60" class="d-inline-block align-text-center">
+            </a>
+          </div>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-justify"></i><span class="navbar-toggler-icon"></span>
+          </button>
+
+
+          <div class="collapse navbar-collapse " id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active text-black-50" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-black-50" aria-current="page" href="#">Dashboard</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Profile
+                </a>
+                <ul class="dropdown-menu ">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
+      <!-- ********************************************************** -->
 
-      <div>
-        <div class="d-flex justify-content-center" >
-          <img src="images/imageTest/book3.png" id="p" class="rounded-pill">
+      <div  class="mt-3 ">
+        <div class="d-flex  slid rounded-pill my-3 textSlid py-5" >
+          <!-- <img src="images/imageTest/book3.png" id="p" class="rounded-pill"> -->
+          <div class=" slids  py-5 w-100" style="height:30rem; width:60rem;">
+
+           <div class="d-flex justify-content-between bg-inf">
+            <h1 class="ms-5 me-3 text-light" >Welcome </h1> 
+            <h1 classe="" style="color:#D09A5E ;">Abdellah</h1> 
+           </div>
+
+           <div class="ms-5 w-100 text-break">
+              <h4 class="text-light me-3 d-flex">Books guide in <span>childhood</span> and amusement in <span>old age</span>  and companion in <span>solitude.</span>  </h4>
+            </div>
+          </div>
+         
         </div>
       
         <div class="px-5 pt-5">
           <input type="text" class="bg-white border-0 rounded-pill " style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
-          <input type="submit" class=" rounded-pill" value="Search">
+          <input type="submit" class="btn btn-light rounded-pill" value="Search">
         </div>
 
       </div>
@@ -35,7 +92,7 @@ include('views/scripte.php');
 
         <?php echo getBooks() ; ?>
 
-      <input type="submit" value="ccccc">
+    
         <!-- <div class="cards ">
           <div class="card shadow rounded-3">
             <div class="p-auto d-flex justify-content-center" style="height: 10rem ;">
@@ -86,15 +143,26 @@ include('views/scripte.php');
           <div class=" mb-3">
             <input type="date" class="form-control" id="date" name="date" required>
           </div>
-
+          
           <select class="form-select mb-3" id="language" name="languge"  required>
-            <option selected >Choose the language of the book</option>
-            <option value="1">Arab</option>
-            <option value="2">Français</option>
-            <option value="3">English</option>
+            <option selected>chose language of the book</option>
+            <option value="ar">Arabic - العربية</option>
+            <option value="fr">france</option>
+            <option value="en">English</option>
+            <option value="zh">Chinese - 中文</option>
+            <option value="es">Spanish - español</option>
+            <option value="hi">Hindi - हिन्दी</option>
+            <option value="pt">Portuguese - português</option>
+            <option value="bn">Bengali - বাংলা</option>
+            <option value="ru">Russian - русский</option>
+            <option value="ja">Japanese - 日本語</option>
+            <option value="pa">Punjabi - ਪੰਜਾਬੀ</option>
           </select>
           <div class="mb-3">
             <input type="number" class="form-control" id="price" name="price" required placeholder="Price">
+          </div>
+          <div class="mb-3">
+            <input type="number" class="form-control" id="quantity" name="quantity" required placeholder="quantity">
           </div>
           <div class="mb-3 d-flex align-items-center">
           <label for="formFile" class="form-label me-3 ">Choose a picture : </label>

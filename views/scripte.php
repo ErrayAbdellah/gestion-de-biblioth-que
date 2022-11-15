@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/styles/style.css">
-</head>
-
 
 <?php 
 $con = mysqli_connect("localhost" , "root" , "" ,"library");
@@ -100,7 +88,9 @@ function getBooks()
                 </div>
                 <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden>
                 <div class="card-footer d-flex justify-content-between">
-                    <input type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" name="delete" value ="Delete">
+                    <form action="Home.php" method="post">
+                        <button type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" name="delete" value ="<?php echo $row['id'] ;?>">delete</button>
+                    </form>
                     <button type="button" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link"
                     onclick="getBook(<?php echo $id ;?>, '<?php echo $title ; ?>' , '<?php echo $author ;?>' , <?php echo $row['LanguagID'] ;?> , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>)"
                     >Update</button>
@@ -114,11 +104,11 @@ function getBooks()
 
 function delete()
 {
-    echo "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
-    // $id = $_POST['bookID'];
-    // $qry = "DELETE FROM `books` WHERE id = ".$id ;
-    // mysqli_query($GLOBALS['con'],$qry);
-    // header('location: Home.php');
+//    var_dump($_POST);
+    $id = $_POST['delete'];
+    $qry = "DELETE FROM `books` WHERE id = ".$id ;
+    mysqli_query($GLOBALS['con'],$qry);
+    header('location: Home.php');
     
 }
 ?>

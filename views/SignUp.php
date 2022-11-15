@@ -56,8 +56,8 @@
                     <a class="small text-muted" href="#!">Forgot password?</a>
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">You have an account? <a href="../index.php"
                         style="color: #2233f0;">Sign in</a></p>
-                    <a href="!" class="small text-muted">Terms of use.</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
+                    <!-- <a href="!" class="small text-muted">Terms of use.</a>
+                    <a href="#!" class="small text-muted">Privacy policy</a> -->
 
                   </form>
 

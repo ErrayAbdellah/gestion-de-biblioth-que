@@ -42,3 +42,25 @@ body{
   height:27rem;
    background-color: blue;
 }
+
+.slid{
+  margin-right: 7rem;
+  margin-left: 7rem;
+  background-image: url(../../images/imageTest/book3.png);
+  height: 35rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-right: 40%;
+}
+.slids
+{
+  margin-right: 7rem;
+  margin-left: 7rem;
+  height: 35rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-right: 100rem;
+}
+
