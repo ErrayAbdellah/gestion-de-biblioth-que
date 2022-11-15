@@ -1,0 +1,59 @@
+CREATE TABLE books(
+    id int primary key AUTO_INCREMENT ,
+    title varchar(255),
+    authorID int,
+    state varchar(255),
+    dateCreate date ,
+    price decimal , 
+    adminID int , 
+    quantity
+    
+    foreign key (authorID) REFERENCES author(id),
+    foreign key (adminID) REFERENCES admin(id)
+)
+
+CREATE TABLE admin(
+    id int primary key AUTO_INCREMENT ,
+    name varchar(255),
+    lastName varchar(250),
+    email varchar(255) UNIQUE,
+    pasword varchar(255) 
+)
+
+
+
+
+CREATE TABLE sell(
+    id int primary key AUTO_INCREMENT ,
+    bookID int,
+    dateSell varchar(250) ,
+    
+    foreign key (bookID) REFERENCES books(id)
+)
+
+
+create table author (
+	id int primary key AUTO_INCREMENT,
+    name varchar(255)
+)
+
+
+
+
+
+
+
+
+
+INSERT INTO `languag`(`id`, `name`) VALUES
+			('ar' ,'Arabic - العربية'),
+            ('fr','france'),
+            ('en','English'),
+           	('zh','Chinese - 中文'),
+            ('es','Spanish - español'),
+            ('hi','Hindi - हिन्दी'),
+            ('pt','Portuguese - português'),
+            ('bn','Bengali - বাংলা'),
+            ('ru','Russian - русский'),
+            ('ja','Japanese - 日本語'),
+            ('pa','Punjabi - ਪੰਜਾਬੀ')
