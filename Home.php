@@ -59,19 +59,25 @@ include('views/scripte.php');
       </nav>
       <!-- ********************************************************** -->
 
-      <div  class="mt-3 ">
-        <div class="d-flex  slid rounded-pill my-3 textSlid py-5" >
+      <div  class="mt-3 w-100">
+        <div class="d-flex w-75  rounded-pill my-3 textSlid py-5 " id="cove">
           <!-- <img src="images/imageTest/book3.png" id="p" class="rounded-pill"> -->
-          <div class=" slids  py-5 w-100" style="height:30rem; width:60rem;">
+          <div class="  py-5" id="cov" >
 
-           <div class="d-flex justify-content-between bg-inf">
-            <h1 class="ms-5 me-3 text-light" >Welcome </h1> 
-            <h1 classe="" style="color:#D09A5E ;">Abdellah</h1> 
-           </div>
-
-           <div class="ms-5 w-100 text-break">
-              <h4 class="text-light me-3 d-flex">Books guide in <span>childhood</span> and amusement in <span>old age</span>  and companion in <span>solitude.</span>  </h4>
+            <div class="d-flex justify-content-between bg-inf">
+              <h1 class="ms-5 me-3 text-light" >Welcome </h1> 
+              <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['name']; ?></h1> 
             </div>
+
+              <div class="ms-5  text-break w-100">
+                <h4 class="text-light ">Books guide in 
+                  <span class="tit">childhood</span>
+                   and amusement in 
+                  <span class="tit">old age</span>  
+                  and companion in 
+                  <span class="tit">solitude.</span>  
+                </h4>
+              </div>
           </div>
          
         </div>
@@ -91,7 +97,7 @@ include('views/scripte.php');
        <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 ">
 
         <?php echo getBooks() ; ?>
-
+      
     
         <!-- <div class="cards ">
           <div class="card shadow rounded-3">
@@ -143,6 +149,34 @@ include('views/scripte.php');
           <div class=" mb-3">
             <input type="date" class="form-control" id="date" name="date" required>
           </div>
+          <select class="form-select mb-3" id="category" name="category"  required>
+            <option selected>chose language of the book</option>
+            <option value="1">Adventure stories</option>
+            <option value="2">Autobiography and memoir</option>
+            <option value="3">Biography</option>
+            <option value="4">Classics</option>
+            <option value="5">Crime</option>
+            <option value="6">Essays</option>
+            <option value="7">Fairy tales, fables, and folk tales</option>
+            <option value="8">Fantasy</option>
+            <option value="9">Historical fiction</option>
+            <option value="10">Horror</option>
+            <option value="11">Humour and satire</option>
+            <option value="12">Literary fiction</option>
+            <option value="13">Mystery</option>
+            <option value="14">Poetry</option>
+            <option value="15">Plays</option>
+            <option value="16">Romance</option>
+            <option value="17">Science fiction</option>
+            <option value="18">Self-help</option>
+            <option value="19">Short stories</option>
+            <option value="20">Thrillers</option>
+            <option value="21">War</option>
+            <option value="22">Women’s fiction</option>
+            <option value="23">Young adult</option>
+            <option value="24">other</option>
+
+          </select>
           
           <select class="form-select mb-3" id="language" name="languge"  required>
             <option selected>chose language of the book</option>
@@ -158,6 +192,8 @@ include('views/scripte.php');
             <option value="ja">Japanese - 日本語</option>
             <option value="pa">Punjabi - ਪੰਜਾਬੀ</option>
           </select>
+          
+
           <div class="mb-3">
             <input type="number" class="form-control" id="price" name="price" required placeholder="Price">
           </div>

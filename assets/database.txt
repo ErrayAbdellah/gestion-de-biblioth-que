@@ -56,4 +56,34 @@ INSERT INTO `languag`(`id`, `name`) VALUES
             ('bn','Bengali - বাংলা'),
             ('ru','Russian - русский'),
             ('ja','Japanese - 日本語'),
-            ('pa','Punjabi - ਪੰਜਾਬੀ')
+            ('pa','Punjabi - ਪੰਜਾਬੀ'),
+
+
+INSERT INTO category (name) VALUES 
+('Adventure stories'),
+('Autobiography and memoir'),
+('Biography'),
+('Classics'),
+('Crime'),
+('Essays'),
+('Fairy tales, fables, and folk tales'),
+('Fantasy'),
+('Historical fiction'),
+('Horror'),
+('Humour and satire'),
+('Literary fiction'),
+('Mystery'),
+('Poetry'),
+('Plays'),
+('Romance'),
+('Science fiction'),
+('Self-help'),
+('Short stories'),
+('Thrillers'),
+('War'),
+('Women’s fiction'),
+('Young adult'),
+('other')
+
+
+https://www.youtube.com/watch?v=onu3w8kqASU&ab_channel=CodingwithElias

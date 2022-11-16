@@ -43,7 +43,7 @@ body{
    background-color: blue;
 }
 
-.slid{
+#cove{
   margin-right: 7rem;
   margin-left: 7rem;
   background-image: url(../../images/imageTest/book3.png);
@@ -53,14 +53,13 @@ body{
   background-repeat: no-repeat;
   padding-right: 40%;
 }
-.slids
+
+#cov
 {
   margin-right: 7rem;
-  margin-left: 7rem;
-  height: 35rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding-right: 100rem;
+  margin-left: 7rem; 
+  height: 30rem;
 }
-
+.tit{
+  color:#D09A5E ;
+}

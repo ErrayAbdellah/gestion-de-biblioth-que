@@ -1,10 +1,13 @@
 
 <?php 
+session_start();
 $con = mysqli_connect("localhost" , "root" , "" ,"library");
-$qry =mysqli_query($GLOBALS['con'] ,  "SELECT b.* , l.name as 'language' FROM books b INNER JOIN languag l on  l.id = b.LanguagID ");
+$qry =mysqli_query($GLOBALS['con'] ,  " SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
+                                        INNER JOIN languag l ON l.id  = b.LanguagID 
+                                        INNER JOIN category c ON c.id = b.categoryID
+                                        WHERE  b.adminID = ".$_SESSION['id']);
 //include('../database/connect.php');
 
-session_start();
 
 if(isset($_POST['signIn']))         signIn() ;
 if(isset($_POST['signUp']))         signUp() ;
@@ -14,13 +17,16 @@ if(isset($_POST['delete']))     delete() ;
 
 function signIn()
 {  
-    $qrySession = mysqli_fetch_assoc(mysqli_query($GLOBALS['con'], "select * from login"));
+    //$qrySession = mysqli_fetch_assoc(mysqli_query($GLOBALS['con'], "select * from admin"));
     $email = htmlspecialchars(trim(strtolower($_POST['SignIn_Email'])));
-    $password =md5( $_POST['SignIn_password']);
-    $qry = mysqli_fetch_assoc(mysqli_query($GLOBALS['con'] , "SELECT * ,count(*) as 'user'  from login where email = '$email' and pasword = '$password'" )); 
-    if( $qry['name'] > 0)
+    $password =md5($_POST['SignIn_password']);
+    $qrye = mysqli_query($GLOBALS['con'] , "SELECT *, count(*) as 'user'  from admin where email = '$email' and pasword = '$password'" ); 
+    $qry = mysqli_fetch_assoc($qrye);
+    if( $qry['user'] != 0)
     {
+        $_SESSION['id']   = $qry['id']   ;
         $_SESSION['name'] = $qry['name'] ;
+
         header('Location:  Home.php') ;
     }
     else
@@ -37,7 +43,7 @@ function signUp()
     $date = $_POST['dateId'];
     $email = trim(strtolower($_POST['email']));
     $password = md5($_POST['passxord']);
-    $qry = "INSERT INTO login(name, lastNmae,dateBirth, email,pasword) VALUES ('$nama','$LastNama','$date','$email','$password')";
+    $qry = "INSERT INTO admin(name ,lastName, email ,pasword ,dateAdmin) VALUES ('$nama','$date','$email','$password','$LastNama')";
     mysqli_query($GLOBALS['con'],$qry);
 }
 
@@ -49,7 +55,11 @@ function addNewBook()
     $date       = $_POST['date'];
     $language   = $_POST['languge'];
     $price      = $_POST['price'];
-    $qry = "INSERT INTO books(title, author, state, dateBook, LanguagID, price) VALUES ('$title','$author','$state','$date',$language,'$price')" ;
+    $admin      = $_SESSION['id'];
+    $quantity   = $_POST['quantity'];
+    $category   = $_POST['category'];
+    $qry = "INSERT INTO `books`(title, state, dateCreate, price, adminID, quntity, LanguagID, categoryID, author) 
+            VALUES ('$title','$state','$date',$price,$admin,$quantity,'$language',$category,'$author')" ;
     mysqli_query($GLOBALS['con'],$qry);
     
     // header('location : ../Home.php');
@@ -58,16 +68,18 @@ function addNewBook()
 
 function getBooks()
 {
-   
+    
     while($row = mysqli_fetch_assoc($GLOBALS['qry']))
     {
         $id         = $row["id"];
         $title      = $row["title"];
         $author     = $row["author"];
         $state      = $row["state"];
-        $date       = $row["dateBook"];
-        $language    = $row["language"];
+        $date       = $row["dateCreate"];
+        $language   = $row["LanguagID"];
         $price      = $row["price"];
+        $category   = $row['category'];
+        $quantity   = $row['quntity'];
         // var_dump($row);
         // echo "***************************************************************";
         ?>
@@ -80,10 +92,12 @@ function getBooks()
                     <h5 class="card-title"> <?php echo $title  ?></h5>
                     <ul class="list-group">
                     <li class="list-group-item list-group-item-light"><i class="fa fa-user"       style="font-size:20px;"></i> <?php echo  $author ?>     </li>
+                    <li class="list-group-item list-group-item-light"></i><?php echo  $category  ?></li>
                     <li class="list-group-item list-group-item-light"><i class="fa fa-language"   style="font-size:20px;"></i> <?php echo  $language ?>       </li>
                     <li class="list-group-item list-group-item-light"><i class="fa fa-map-marker" style="font-size:20px;"></i> <?php echo  $state ?>     </li>
                     <li class="list-group-item list-group-item-light"><i class="fa fa-calendar"   style="font-size:20px;"></i> <?php echo  $date ?> </li>
                     <li class="list-group-item list-group-item-light"><i class="fa fa-money"      style="font-size:20px;"></i> <?php echo  $price  ?> MAD    </li>
+                    <li class="list-group-item list-group-item-light">Qnt : </i> <?php echo  $quantity  ?></li>
                     </ul>
                 </div>
                 <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden>
