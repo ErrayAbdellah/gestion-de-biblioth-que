@@ -10,9 +10,13 @@ include('views/scripte.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="assets/styles/style.css">
+      <!-- BEGIN parsley css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/doc/assets/docs.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css" />
+    <!-- END parsley css-->
 </head>
 
 <body>
@@ -28,7 +32,9 @@ include('views/scripte.php');
           </div>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="bi bi-justify"></i><span class="navbar-toggler-icon"></span>
+          
+          <i class="fa-solid fa-bars"></i>
+          <span class="navbar-toggler-icon"></span>
           </button>
 
 
@@ -60,13 +66,13 @@ include('views/scripte.php');
       <!-- ********************************************************** -->
 
       <div  class="mt-3 w-100">
-        <div class="d-flex w-75  rounded-pill my-3 textSlid py-5 " id="cove">
+        <div class="d-flex w-75  rounded-pill my-3 py-5 " id="cove">
           <!-- <img src="images/imageTest/book3.png" id="p" class="rounded-pill"> -->
-          <div class="  py-5" id="cov" >
+          <div class="py-5 w-100" id="cov" style="width: 100%;" >
 
-            <div class="d-flex justify-content-between bg-inf">
-              <h1 class="ms-5 me-3 text-light" >Welcome </h1> 
-              <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['name']; ?></h1> 
+            <div class="d-flex justify-content-between bg-inf " >
+              <h1 class="ms-2 me-3 text-light" >Welcome </h1> 
+              <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['admin']['name']; ?></h1> 
             </div>
 
               <div class="ms-5  text-break w-100">
@@ -136,9 +142,9 @@ include('views/scripte.php');
       </div>
       <div class="modal-body p-3">
         <!-- content model -->
-        <form action="Home.php" method="post" id="formTask">
+        <form action="Home.php" method="post" id="formTask" enctype="multipart/form-data" data-parsley-validate>
           <div class=" mb-3">
-            <input type="text" class="form-control" id="title" name="title" required placeholder="Title">
+            <input type="text" class="form-control" id="title" name="title" required placeholder="Title" >
           </div>
           <div class=" mb-3">
             <input type="text" class="form-control" id="author" name="author" required placeholder="Author">
@@ -202,13 +208,14 @@ include('views/scripte.php');
           </div>
           <div class="mb-3 d-flex align-items-center">
           <label for="formFile" class="form-label me-3 ">Choose a picture : </label>
-            <input class="form-control align-text-center" type="file" id="formFile" style="width: 9rem;">
+            <input class="form-control align-text-center" type="file" id="formFile" name="formFile" style="width: 9rem;">
           </div>
           <!-- end content model -->
         </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary" name="addNewBook" value="ADD NEW BOOK">
+        <div class="modal-footer d-flex justify-content-between" id="btns">
+            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
+            <input type="submit" class="btn btn-primary d-none" name="updateModel" id="updateModel" value="updateModel">
         </div>
       </form>
     </div>
@@ -224,5 +231,10 @@ include('views/scripte.php');
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="assets/js/scripte.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- END jquery js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- END parsley js-->
 </body>
 </html>
