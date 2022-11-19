@@ -1,7 +1,10 @@
 <?php 
 include('views/scripte.php');
 
-
+if(!isset($_SESSION['admin']))
+{
+  header('location: index.php');
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,43 +23,41 @@ include('views/scripte.php');
 </head>
 
 <body>
-
-
       <!-- ****************************Navbar****************************** -->
+
       <nav class="navbar navbar-expand-lg shadow" style="height: 4rem; ">
         <div class="container-fluid ">
           <div class="">
             <a class="navbar-brand" href="#">
-              <img src="images/Logo_.png" alt="" width="100" height="60" class="d-inline-block align-text-center">
+              <img src="images/Logo_.png" alt="" width="100" height="50" class="d-inline-block ">
             </a>
           </div>
 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           
           <i class="fa-solid fa-bars"></i>
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon d-flex"></span>
           </button>
 
 
-          <div class="collapse navbar-collapse " id="navbarScroll">
+          <div class="collapse navbar-collapse" style="background-color: #DDC8B1;" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
               <li class="nav-item">
-                <a class="nav-link active text-black-50" aria-current="page" href="#">Home</a>
+                <a class="nav-link active text-black-50" aria-current="page" href="Home.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active text-black-50" aria-current="page" href="#">Dashboard</a>
+                <a class="nav-link active text-black-50" aria-current="page" href="views/dashboard.php">Dashboard</a>
               </li>
             </ul>
-            <ul class="navbar-nav ">
+            <ul class="navbar-nav navProfile" >
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Profile
                 </a>
                 <ul class="dropdown-menu ">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">My Account</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="views/logOut.php">logout</a></li>
                 </ul>
               </li>
             </ul>
@@ -129,20 +130,20 @@ include('views/scripte.php');
 
       </section> 
      
-      <footer>
-        ...
+      <footer class="card-footer rounded-bottom rounded-pill" style="background-color: #613C2D;">
+       <h3 class="pt-3 ps-5 fs-5 text-light"> Copyright © 2022. All rights reserved.</h3>
       </footer>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-3">
         <!-- content model -->
-        <form action="Home.php" method="post" id="formTask" enctype="multipart/form-data" data-parsley-validate>
+        <form class="" action="Home.php" method="post" id="formTask" enctype="multipart/form-data" data-parsley-validate>
           <div class=" mb-3">
             <input type="text" class="form-control" id="title" name="title" required placeholder="Title" >
           </div>
@@ -156,7 +157,7 @@ include('views/scripte.php');
             <input type="date" class="form-control" id="date" name="date" required>
           </div>
           <select class="form-select mb-3" id="category" name="category"  required>
-            <option selected>chose language of the book</option>
+            <option selected>chose Category of the book</option>
             <option value="1">Adventure stories</option>
             <option value="2">Autobiography and memoir</option>
             <option value="3">Biography</option>
@@ -181,22 +182,21 @@ include('views/scripte.php');
             <option value="22">Women’s fiction</option>
             <option value="23">Young adult</option>
             <option value="24">other</option>
-
           </select>
           
           <select class="form-select mb-3" id="language" name="languge"  required>
             <option selected>chose language of the book</option>
-            <option value="ar">Arabic - العربية</option>
+            <option value="ar">Arabic</option>
             <option value="fr">france</option>
             <option value="en">English</option>
-            <option value="zh">Chinese - 中文</option>
-            <option value="es">Spanish - español</option>
-            <option value="hi">Hindi - हिन्दी</option>
-            <option value="pt">Portuguese - português</option>
-            <option value="bn">Bengali - বাংলা</option>
-            <option value="ru">Russian - русский</option>
-            <option value="ja">Japanese - 日本語</option>
-            <option value="pa">Punjabi - ਪੰਜਾਬੀ</option>
+            <option value="zh">Chinese</option>
+            <option value="es">Spanish</option>
+            <option value="hi">Hindi</option>
+            <option value="pt">Portuguese</option>
+            <option value="bn">Bengali</option>
+            <option value="ru">Russian</option>
+            <option value="ja">Japanese</option>
+            <option value="pa">Punjabi</option>
           </select>
           
 
@@ -213,9 +213,13 @@ include('views/scripte.php');
           <!-- end content model -->
         </div>
         <div class="modal-footer d-flex justify-content-between" id="btns">
-            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input type="submit" class="btn btn-primary d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
-            <input type="submit" class="btn btn-primary d-none" name="updateModel" id="updateModel" value="updateModel">
+          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="hidden" name="idUpdate" id="idUpdate">
+            <input type="submit" class="btn btn-success rounded-pill d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
+            <div id="btnss" class="d-none">
+            <input type="submit" class="btn btn-danger rounded-pill me-1" id="left-panel-link" name="delete" value ="delete">
+            <input type="submit" class="btn btn-info  rounded-pill" name="updateModel" id="updateModel" value="updateModel">
+          </div>  
         </div>
       </form>
     </div>
@@ -224,8 +228,32 @@ include('views/scripte.php');
 
 
 
-
-
+<div class="modal fade" id="SellBooks" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SellBooks">Selling Books</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3">
+        <!-- content model  -->
+        <form action="Home.php" method="post" >
+          <div class=" mb-3">
+            <input type="number" class="form-control" id="qnt" name="qnt" required placeholder="Quantity" >
+          </div>
+          <input type="hidden" name="idBookSell" id="idBookSell" >
+          
+        
+        <!--end content model -->
+        </div>
+        <div class="modal-footer d-flex justify-content-between" id="btns">
+          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-success rounded-pill me-1" id="left-panel-link" name="Sell" value ="Sell">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <!-- JavaScript Bundle with Popper -->

@@ -5,6 +5,7 @@
   }
 body{
     background-color: #DDC8B1;
+    height: 100vh;
 }
 
 #logo 
@@ -46,10 +47,9 @@ body{
   margin-right: 7rem;
   margin-left: 7rem;
   background-image: url(../../images/imageTest/book3.png);
-  height: 35rem;
+  height: 20rem;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   padding-right: 40%;
 }
 
@@ -61,4 +61,16 @@ body{
 }
 .tit{
   color:#D09A5E ;
+}
+
+.navProfile{
+  margin-right:4.3rem ;
+}
+
+
+.back
+{
+  background-image: url(../../images/backgBook.jpg);
+  background-size: cover;
+  background-position: center;
 }

@@ -10,6 +10,7 @@ if(isset($_POST['signUp']))         signUp() ;
 if(isset($_POST['addNewBook']))     addNewBook() ;
 if(isset($_POST['delete']))     delete() ;
 if(isset($_POST['updateModel']))     update() ;
+if(isset($_POST['Sell']))     sell() ;
 
 
 
@@ -23,7 +24,6 @@ function signIn()
     if( $qry['user'] > 0)
     {
         $_SESSION['admin'] = $qry;
-        
         // $_SESSION['id']   = $qry['id']   ;
         // $_SESSION['name'] = $qry['name'] ;
 
@@ -97,21 +97,15 @@ function addNewBook()
             header("location: Home.php?error=$msg"); 
         }
     }
-
-
-
-    
-    
     
     header('location: Home.php');
 }
 
 function getBooks()
 {
-    $qry =mysqli_query($GLOBALS['con'] ,  " SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
+    $qry =mysqli_query($GLOBALS['con'],"SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
                                         INNER JOIN languag l ON l.id  = b.LanguagID 
-                                        INNER JOIN category c ON c.id = b.categoryID
-                                        WHERE  b.adminID = ".$_SESSION['admin']['id']);
+                                        INNER JOIN category c ON c.id = b.categoryID WHERE  b.adminID = ".$_SESSION['admin']['id']);
 
    
     while($row = mysqli_fetch_assoc($qry))
@@ -121,7 +115,7 @@ function getBooks()
         $author     = $row["author"];
         $state      = $row["state"];
         $date       = $row["dateCreate"];
-        $language   = $row["LanguagID"];
+        $language   = $row["language"];
         $price      = $row["price"];
         $category   = $row['category'];
         $quantity   = $row['quntity'];
@@ -138,43 +132,42 @@ function getBooks()
                         <div class="card-body py-0">
                             <h5 class="card-title"> <?php echo $title  ?></h5>
                             <ul class="list-group" style="height: 13rem;">
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;" ><i class="fa fa-user"      style="font-size: 12px;"></i> <?php echo  $author ?>     </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"></i><?php echo  $category  ?></li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-language"   style="font-size: 12px;"></i> <?php echo  $language ?>       </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-map-marker" style="font-size: 12px;"></i> <?php echo  $state ?>     </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-calendar"   style="font-size: 12px;"></i> <?php echo  $date ?> </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-money"      style="font-size: 12px;"></i> <?php echo  $price  ?> MAD    </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;">Qnt : </i> <?php echo  $quantity  ?></li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-user"       style="font-size: 12px;"></i> <?php echo  $author    ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;">                                                          <?php echo  $category  ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-language"   style="font-size: 12px;"></i> <?php echo  $language  ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-map-marker" style="font-size: 12px;"></i> <?php echo  $state     ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-calendar"   style="font-size: 12px;"></i> <?php echo  $date      ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-money"      style="font-size: 12px;"></i> <?php echo  $price     ;?> MAD  </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa-regular fa-box-open">Qnt : </i> <?php echo  $quantity  ?></li>
                             </ul>
                         </div>
-                        <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden>
+                        <!-- <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden> -->
                         <div class=" d-flex justify-content-between pt-1">
-                            <form action="Home.php" method="post">
-                                <button type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" name="delete" value ="<?php echo $row['id'] ;?>">delete</button>
-                            </form>
+                                <button type="button" class="btn btn-danger rounded-pill" 
+                                id="left-panel-link" value ="<?php echo $row['id'] ;?>" 
+                                data-bs-toggle="modal" data-bs-target="#SellBooks"
+                                onclick="sell(<?php echo $id ;?>)">
+                                Sell Now</button>
                             
-                            <button type="button" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link"
-                            onclick="getBook('<?php echo $title ; ?>' , '<?php echo $author ;?>' , '<?php echo $language ;?>' , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>,<?php echo  $quantity ;?>,<?php echo  $row['categoryID'] ;?> ,'<?php echo $image;?>')"
+                            <button type="submit" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link" value="<?php echo $row['id'] ;?>" name="update"
+                            onclick="getBook(<?php echo $id ;?> ,'<?php echo $title ; ?>' , '<?php echo $author ;?>' ,'<?php echo $language ;?>' , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>,<?php echo  $quantity ;?>,<?php echo  $row['categoryID'] ;?> ,'<?php echo $image;?>')"
                             >Update</button>
                         </div>
                     </div>          
                 </div>
             <?php
     }
-    
-    
 }
 
 function update() 
 {
-    $id = $_POST['delete'];
+    $id = $_POST['idUpdate'];
     $title      = $_POST['title'];
     $author     = $_POST['author'];
     $state      = $_POST['state'];
     $date       = $_POST['date'];
     $language   = $_POST['languge'];
     $price      = $_POST['price'];
-    $admin      = $_SESSION['admin']['id'];
     $quantity   = $_POST['quantity'];
     $category   = $_POST['category'];
     $image      = $_POST['formFile'];
@@ -207,11 +200,10 @@ function update()
 
                     move_uploaded_file($tmp_name,$ImageUpload);
                     
-                    $qry = "UPDATE `books` SET `title`='=$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
+                    $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
                             `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
                     mysqli_query($GLOBALS['con'],$qry);
-                    
-                    
+
                 }else
                 {
                     echo "waaaaloooo";
@@ -235,11 +227,24 @@ function update()
 function delete()
 {
 //    var_dump($_POST);
-    $id = $_POST['delete'];
+  
+    $id = $_POST['idUpdate'];
     $qry = "DELETE FROM `books` WHERE id = ".$id ;
     mysqli_query($GLOBALS['con'],$qry);
     header('location: Home.php');
     
 }
 
+function sell()
+{
+    $dateSell = date("Y-m-d");
+
+    $qnt    = $_POST['qnt'] ;
+    $book   = $_POST['idBookSell'] ; 
+    $qry    = "UPDATE books SET quntity = (quntity - $qnt) WHERE id = $book";
+    $qry2   = "INSERT INTO sell( bookID,quantity,dateSell) VALUES ($book,$qnt,'$dateSell')";
+
+    mysqli_query($GLOBALS['con'],$qry);
+    mysqli_query($GLOBALS['con'],$qry2);
+}
 ?>
