@@ -61,7 +61,7 @@
             <ul class="dropdown-menu ">
                 <li><a class="dropdown-item" href="#">My Account</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="views/logOut.php">logout</a></li>
+                <li><a class="dropdown-item" href="logOut.php">logout</a></li>
             </ul>
             </li>
         </ul>
@@ -99,7 +99,7 @@
                       </div>
                       <div class="col-auto">
                         <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i class="fas fa-chart-pie"></i>
+                          <!-- <i class="fas fa-chart-pie"></i> -->
                         </div>
                       </div>
                     </div>

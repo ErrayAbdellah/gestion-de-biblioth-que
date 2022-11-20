@@ -97,8 +97,8 @@ function addNewBook()
             header("location: Home.php?error=$msg"); 
         }
     }
-    
-    header('location: Home.php');
+    $_SESSION['message'] = "Task has been added successfully !";
+    header("location: Home.php"); 
 }
 
 function getBooks()
@@ -133,12 +133,12 @@ function getBooks()
                             <h5 class="card-title"> <?php echo $title  ?></h5>
                             <ul class="list-group" style="height: 13rem;">
                                 <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-user"       style="font-size: 12px;"></i> <?php echo  $author    ;?>      </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;">                                                          <?php echo  $category  ;?>      </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-balloons"      style="font-size: 12px;"></i> <?php echo  $category  ;?>      </li>
                                 <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-language"   style="font-size: 12px;"></i> <?php echo  $language  ;?>      </li>
                                 <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-map-marker" style="font-size: 12px;"></i> <?php echo  $state     ;?>      </li>
                                 <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-calendar"   style="font-size: 12px;"></i> <?php echo  $date      ;?>      </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-money"      style="font-size: 12px;"></i> <?php echo  $price     ;?> MAD  </li>
-                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa-regular fa-box-open">Qnt : </i> <?php echo  $quantity  ?></li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-money-bill-1"      style="font-size: 12px;"></i> <?php echo  $price     ;?> MAD  </li>
+                                <li class="list-group-item list-group-item-light" style="height: 14%; font-size: 14px;"><i class="fa fa-box-open"></i> <?php echo  $quantity  ?></li>
                             </ul>
                         </div>
                         <!-- <input type="text" id="bookID" name="bookID" value="<?php echo $id ;?>" hidden> -->
@@ -170,17 +170,17 @@ function update()
     $price      = $_POST['price'];
     $quantity   = $_POST['quantity'];
     $category   = $_POST['category'];
-    $image      = $_POST['formFile'];
+    $image      = $_POST['imgUpdate'];
 
     if(isset($_FILES['formFile']))
     {
-        $ImgName = $_FILES['formFile']['name'];
-        $size = $_FILES['formFile']['size'];
+        $ImgName  = $_FILES['formFile']['name'];
+        $size     = $_FILES['formFile']['size'];
         $tmp_name = $_FILES['formFile']['tmp_name'];
         $ImgError = $_FILES['formFile']['error'];
         if($ImgError ==0)
         {
-            if($size <= 200000){
+            if($size <= 2000000){
 
                 $imgInfo = pathinfo($ImgName,PATHINFO_EXTENSION);
                 $imgLower = strtolower($imgInfo);
@@ -198,39 +198,50 @@ function update()
                     $new_img = $newImageName.$imgInfo ;
                     $ImageUpload = 'assets/IMG/'.$new_img;
 
-                    move_uploaded_file($tmp_name,$ImageUpload);
-                    
+                    move_uploaded_file($tmp_name,$ImageUpload);    ;
                     $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
-                            `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
+                    `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
                     mysqli_query($GLOBALS['con'],$qry);
-
+                    $_SESSION['message'] = "Task has been updated successfully !";
+                    header('location: Home.php');
+                    
                 }else
                 {
-                    echo "waaaaloooo";
+                    $_SESSION['message']  = "Sorry ! this not picture," ;
+                    header("location: Home.php"); 
                 }
             }
 
         }else{
                
-            $msg = "Sorry ! this picture if to latge," ;
-            header("location: Home.php?error=$msg"); 
+            $_SESSION['message']  = "Sorry ! this picture if to latge," ;
+            header("location: Home.php"); 
         }
     }
-
-
-
+    else
+    {
+        $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
+        `categoryID`='$category',`author`='$author' WHERE id = ". $id ;
+        mysqli_query($GLOBALS['con'],$qry);
+        $_SESSION['message'] = "Task has been updated successfully !";
+        header('location: Home.php');
+    }
     
-    
-    
-    header('location: Home.php');
+   
 }
 function delete()
 {
 //    var_dump($_POST);
-  
+
+
+        $img     = "example.jpg";
+        $imgpath = "gallary/img/".$img;
+        unlink( $imgpath );
+
     $id = $_POST['idUpdate'];
     $qry = "DELETE FROM `books` WHERE id = ".$id ;
     mysqli_query($GLOBALS['con'],$qry);
+    $_SESSION['message'] = "Task has been deleted successfully !";
     header('location: Home.php');
     
 }

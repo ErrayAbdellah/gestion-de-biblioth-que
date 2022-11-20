@@ -43,7 +43,7 @@ if(!isset($_SESSION['admin']))
           <div class="collapse navbar-collapse" style="background-color: #DDC8B1;" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
               <li class="nav-item">
-                <a class="nav-link active text-black-50" aria-current="page" href="Home.php">Home</a>
+                <a class="nav-link active text-black-50 " aria-current="page" href="Home.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active text-black-50" aria-current="page" href="views/dashboard.php">Dashboard</a>
@@ -92,17 +92,29 @@ if(!isset($_SESSION['admin']))
         <div class="px-5 pt-5">
           <input type="text" class="bg-white border-0 rounded-pill " style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
-          <input type="submit" class="btn btn-light rounded-pill" value="Search">
+          <input type="submit" class="btn btn-light rounded-pill" id="search" value="Search">
         </div>
 
       </div>
+      <?php if (isset($_SESSION['message'])): ?>
+          <div class="alert alert-green alert-dismissible fade show">
+              <strong>Success!</strong>
+              <?php
+              echo $_SESSION['message'];
+              unset($_SESSION['message']);
+              ?>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+      <?php endif ?>
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="clearmodel()"> Add new book <i class="fa fa-plus "></i></button>
       </div>
       <br>
       <hr>
-       <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 ">
 
+      
+       <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 " id="readBook">
+      
         <?php echo getBooks() ; ?>
       
     
@@ -215,6 +227,7 @@ if(!isset($_SESSION['admin']))
         <div class="modal-footer d-flex justify-content-between" id="btns">
           <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <input type="hidden" name="idUpdate" id="idUpdate">
+          <input type="text" name="imgUpdate" id="imgUpdate" >
             <input type="submit" class="btn btn-success rounded-pill d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
             <div id="btnss" class="d-none">
             <input type="submit" class="btn btn-danger rounded-pill me-1" id="left-panel-link" name="delete" value ="delete">
@@ -255,7 +268,19 @@ if(!isset($_SESSION['admin']))
   </div>
 </div>
 
+<!-- link ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+            $("#search").keyup(function(){
+                var x = $(this).val();
 
+       alert(x);
+    });
+});
+
+
+</script>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="assets/js/scripte.js"></script>
@@ -264,5 +289,8 @@ if(!isset($_SESSION['admin']))
     <!-- END jquery js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- END parsley js-->
+
+
+    
 </body>
 </html>
