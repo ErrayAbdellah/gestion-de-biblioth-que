@@ -49,14 +49,14 @@ body{
   height: 20rem;
   background-size: cover;
   background-position: center;
-  padding-right: 40%;
+  padding-right: 2%;
 }
 
-#cov
+#textCov
 {
-  margin-right: 7rem;
-  margin-left: 7rem; 
-  height: 30rem;
+  /* margin-right: 7rem;   */
+   margin-left: 2rem;  
+  width: 100rem;
 }
 .tit{
   color:#D09A5E ;
@@ -72,4 +72,9 @@ body{
   background-image: url(../../images/backgBook.jpg);
   background-size: cover;
   background-position: center;
+}
+
+.table
+{
+  width: 3rem;
 }

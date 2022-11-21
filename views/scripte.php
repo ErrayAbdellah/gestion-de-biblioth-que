@@ -16,7 +16,7 @@ if(isset($_POST['Sell']))     sell() ;
 
 function signIn()
 {  
-    //$qrySession = mysqli_fetch_assoc(mysqli_query($GLOBALS['con'], "select * from admin"));
+    
     $email = htmlspecialchars(trim(strtolower($_POST['SignIn_Email'])));
     $password =md5($_POST['SignIn_password']);
     $qrye = mysqli_query($GLOBALS['con'] , "SELECT *, count(*) as 'user'  from admin where email = '$email' and pasword = '$password'" ); 
@@ -24,8 +24,6 @@ function signIn()
     if( $qry['user'] > 0)
     {
         $_SESSION['admin'] = $qry;
-        // $_SESSION['id']   = $qry['id']   ;
-        // $_SESSION['name'] = $qry['name'] ;
 
         var_dump($_SESSION['admin']['id']);
         header('Location:  Home.php') ;
@@ -84,10 +82,12 @@ function addNewBook()
                     VALUES ('$title','$state','$date',$price,$admin,$quantity,'$language',$category,'$author','$newImageName')" ;
                     mysqli_query($GLOBALS['con'],$qry);
                     
+                    $_SESSION['message'] = "Task has been added successfully !";
+                    //header("location: Home.php"); 
                     
                 }else
                 {
-                    echo "waaaaloooo";
+                    echo "error pictur not found";
                 }
             }
 
@@ -97,8 +97,8 @@ function addNewBook()
             header("location: Home.php?error=$msg"); 
         }
     }
-    $_SESSION['message'] = "Task has been added successfully !";
-    header("location: Home.php"); 
+
+    
 }
 
 function getBooks()
@@ -116,6 +116,7 @@ function getBooks()
         $state      = $row["state"];
         $date       = $row["dateCreate"];
         $language   = $row["language"];
+        $language2  =$row["LanguagID"];
         $price      = $row["price"];
         $category   = $row['category'];
         $quantity   = $row['quntity'];
@@ -150,7 +151,7 @@ function getBooks()
                                 Sell Now</button>
                             
                             <button type="submit" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link" value="<?php echo $row['id'] ;?>" name="update"
-                            onclick="getBook(<?php echo $id ;?> ,'<?php echo $title ; ?>' , '<?php echo $author ;?>' ,'<?php echo $language ;?>' , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>,<?php echo  $quantity ;?>,<?php echo  $row['categoryID'] ;?> ,'<?php echo $image;?>')"
+                            onclick="getBook(<?php echo $id ;?> ,'<?php echo $title ; ?>' , '<?php echo $author ;?>' ,'<?php echo $language2 ;?>' , '<?php echo $state ;?>' , '<?php echo $date ;?>' ,<?php echo  $price ;?>,<?php echo  $quantity ;?>,<?php echo  $row['categoryID'] ;?> ,'<?php echo $image;?>')"
                             >Update</button>
                         </div>
                     </div>          
@@ -158,6 +159,9 @@ function getBooks()
             <?php
     }
 }
+
+
+
 
 function update() 
 {
@@ -172,7 +176,7 @@ function update()
     $category   = $_POST['category'];
     $image      = $_POST['imgUpdate'];
 
-    if(isset($_FILES['formFile']))
+    if(!empty($_FILES['formFile']))
     {
         $ImgName  = $_FILES['formFile']['name'];
         $size     = $_FILES['formFile']['size'];
@@ -180,7 +184,8 @@ function update()
         $ImgError = $_FILES['formFile']['error'];
         if($ImgError ==0)
         {
-            if($size <= 2000000){
+            if($size <= 2000000)
+            {
 
                 $imgInfo = pathinfo($ImgName,PATHINFO_EXTENSION);
                 $imgLower = strtolower($imgInfo);
@@ -195,48 +200,48 @@ function update()
                     else{
                         $newImageName = substr($image,-3);
                     }
-                    $new_img = $newImageName.$imgInfo ;
+                    
+                    $new_img = $newImageName.$imgLower ;
                     $ImageUpload = 'assets/IMG/'.$new_img;
-
-                    move_uploaded_file($tmp_name,$ImageUpload);    ;
+                    move_uploaded_file($tmp_name,$ImageUpload);    
                     $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
                     `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
                     mysqli_query($GLOBALS['con'],$qry);
                     $_SESSION['message'] = "Task has been updated successfully !";
                     header('location: Home.php');
                     
+                
                 }else
                 {
                     $_SESSION['message']  = "Sorry ! this not picture," ;
                     header("location: Home.php"); 
                 }
-            }
 
-        }else{
-               
-            $_SESSION['message']  = "Sorry ! this picture if to latge," ;
-            header("location: Home.php"); 
+            }else
+            {  
+                $_SESSION['message']  = "Sorry ! this picture if to latge," ;
+                header("location: Home.php"); 
+            }
         }
-    }
-    else
-    {
-        $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
-        `categoryID`='$category',`author`='$author' WHERE id = ". $id ;
-        mysqli_query($GLOBALS['con'],$qry);
-        $_SESSION['message'] = "Task has been updated successfully !";
-        header('location: Home.php');
-    }
+        else
+        {
+            $qryy = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
+                    `categoryID`='$category',`author`='$author' WHERE id = ". $id ;
+            mysqli_query($GLOBALS['con'],$qryy);
+            $_SESSION['message'] = "Task has been updated successfully !";
+            header('location: Home.php');
+        }
     
    
+    }
 }
 function delete()
 {
-//    var_dump($_POST);
 
 
-        $img     = "example.jpg";
-        $imgpath = "gallary/img/".$img;
-        unlink( $imgpath );
+        // $img     = "";
+        // $imgpath = "/img/".$img;
+        // unlink($imgpath);
 
     $id = $_POST['idUpdate'];
     $qry = "DELETE FROM `books` WHERE id = ".$id ;

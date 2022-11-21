@@ -24,6 +24,8 @@ if(!isset($_SESSION['admin']))
 
 <body>
       <!-- ****************************Navbar****************************** -->
+      
+     
 
       <nav class="navbar navbar-expand-lg shadow" style="height: 4rem; ">
         <div class="container-fluid ">
@@ -50,11 +52,11 @@ if(!isset($_SESSION['admin']))
               </li>
             </ul>
             <ul class="navbar-nav navProfile" >
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li class="nav-item dropdown pe-4">
+                <a class="nav-link dropdown-toggle text-dark me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Profile
                 </a>
-                <ul class="dropdown-menu ">
+                <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#">My Account</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="views/logOut.php">logout</a></li>
@@ -67,16 +69,15 @@ if(!isset($_SESSION['admin']))
       <!-- ********************************************************** -->
 
       <div  class="mt-3 w-100">
-        <div class="d-flex w-75  rounded-pill my-3 py-5 " id="cove">
-          <!-- <img src="images/imageTest/book3.png" id="p" class="rounded-pill"> -->
-          <div class="py-5 w-100" id="cov" style="width: 100%;" >
+        <div class="d-flex  rounded-pill" id="cove">
+          <div class="px-5" id="textCov">
 
-            <div class="d-flex justify-content-between bg-inf " >
-              <h1 class="ms-2 me-3 text-light" >Welcome </h1> 
+            <div class="d-flex flex-wrap pt-4 mt-3" >
+              <h1 class="text-light me-4" >Welcome </h1> 
               <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['admin']['name']; ?></h1> 
             </div>
 
-              <div class="ms-5  text-break w-100">
+              <div class=" text-break mt-5">
                 <h4 class="text-light ">Books guide in 
                   <span class="tit">childhood</span>
                    and amusement in 
@@ -90,12 +91,18 @@ if(!isset($_SESSION['admin']))
         </div>
       
         <div class="px-5 pt-5">
-          <input type="text" class="bg-white border-0 rounded-pill " style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
+          <input type="text" class="bg-white border-0 rounded-pill " name="search" id="search"  style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
-          <input type="submit" class="btn btn-light rounded-pill" id="search" value="Search">
+          <!-- <input type="submit" class="btn btn-light rounded-pill" name="search" placeholder="search"> -->
         </div>
-
+        <div class="d-flex justify-content-end mt-5">
+        <button type="submit" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="clearmodel()"> Add new book <i class="fa fa-plus "></i></button>
       </div>
+      </div>
+      
+     
+      <br>
+      <hr>
       <?php if (isset($_SESSION['message'])): ?>
           <div class="alert alert-green alert-dismissible fade show">
               <strong>Success!</strong>
@@ -106,12 +113,6 @@ if(!isset($_SESSION['admin']))
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
       <?php endif ?>
-      <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="clearmodel()"> Add new book <i class="fa fa-plus "></i></button>
-      </div>
-      <br>
-      <hr>
-
       
        <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 " id="readBook">
       
@@ -155,7 +156,7 @@ if(!isset($_SESSION['admin']))
       </div>
       <div class="modal-body p-3">
         <!-- content model -->
-        <form class="" action="Home.php" method="post" id="formTask" enctype="multipart/form-data" data-parsley-validate>
+        <form class="" action="Home.php" method="post" id="formTask" enctype="multipart/form-data" >
           <div class=" mb-3">
             <input type="text" class="form-control" id="title" name="title" required placeholder="Title" >
           </div>
@@ -196,7 +197,7 @@ if(!isset($_SESSION['admin']))
             <option value="24">other</option>
           </select>
           
-          <select class="form-select mb-3" id="language" name="languge"  required>
+          <select class="form-select mb-3" id="language" name="languge"  >
             <option selected>chose language of the book</option>
             <option value="ar">Arabic</option>
             <option value="fr">france</option>
@@ -227,7 +228,7 @@ if(!isset($_SESSION['admin']))
         <div class="modal-footer d-flex justify-content-between" id="btns">
           <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <input type="hidden" name="idUpdate" id="idUpdate">
-          <input type="text" name="imgUpdate" id="imgUpdate" >
+          <input type="hidden" name="imgUpdate" id="imgUpdate" >
             <input type="submit" class="btn btn-success rounded-pill d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
             <div id="btnss" class="d-none">
             <input type="submit" class="btn btn-danger rounded-pill me-1" id="left-panel-link" name="delete" value ="delete">
@@ -271,13 +272,6 @@ if(!isset($_SESSION['admin']))
 <!-- link ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-  $(document).ready(function(){
-            $("#search").keyup(function(){
-                var x = $(this).val();
-
-       alert(x);
-    });
-});
 
 
 </script>

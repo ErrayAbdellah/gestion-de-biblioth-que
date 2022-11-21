@@ -1,4 +1,5 @@
 <?php
+
     $con = mysqli_connect("localhost","root","","library");
     session_start();
    
@@ -11,6 +12,8 @@
         $books      = mysqli_fetch_column(mysqli_query($con,$qryBooks));
         $selling    = mysqli_fetch_column(mysqli_query($con,$qrySelling));
         $qnt        = mysqli_fetch_column(mysqli_query($con,$qryQnt));
+
+      // $qnt = 12;
     
 ?>
 
@@ -27,12 +30,12 @@
     <link rel="stylesheet" href="../assets/styles/style.css">
 
 </head>
-<body >
+<body class="back">
 
     <nav class="navbar navbar-expand-lg shadow" style="height: 4rem; ">
     <div class="container-fluid ">
         <div class="">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="../Home.php">
             <img src="../images/Logo_.png" alt="" width="100" height="50" class="d-inline-block ">
         </a>
         </div>
@@ -44,18 +47,18 @@
         </button>
 
 
-        <div class="collapse navbar-collapse" style="background-color: #DDC8B1;" id="navbarScroll">
+        <div class="collapse navbar-collapse"  id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
             <li class="nav-item">
-            <a class="nav-link active text-black-50" aria-current="page" href="../Home.php">Home</a>
+            <a class="nav-link active text-white  " aria-current="page" href="../Home.php">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active text-black-50" aria-current="page" href="dashboard.php">Dashboard</a>
+            <a class="nav-link active  text-white" aria-current="page" href="dashboard.php">Dashboard</a>
             </li>
         </ul>
         <ul class="navbar-nav navProfile" >
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown pe-4">
+            <a class="nav-link dropdown-toggle text-white me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Profile
             </a>
             <ul class="dropdown-menu ">
@@ -68,8 +71,8 @@
         </div>
     </div>
     </nav>
-
-    <section class="h-100 back" style=" padding-top: 12rem ;">
+   
+    <section class="h-100 " style=" padding-top: 1rem ;">
     <div class=" d-flex flex-wrap justify-content-center ">
               <div class="m-2 me-2" style="width: 16rem;">
                 <div class="card card-stats mb-4 mb-xl-0">
@@ -155,13 +158,58 @@
               </div>
               <!-- Page content -->
             </div>
-    </section>
+            
+            <div class="d-flex justify-content-around flex-wrap">
+              <table class="table bg-light  " style="width: 40rem ;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Quantiy</th>
+                    <th scope="col">Category</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $cnt = 0 ;
+                    $qry = "SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
+                            INNER JOIN languag l ON l.id  = b.LanguagID 
+                            INNER JOIN category c ON c.id = b.categoryID WHERE b.adminID = ".$_SESSION['admin']['id'];
+
+                    $result = mysqli_query($GLOBALS['con'],$qry);
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                          $title      = $row["title"];
+                          $date       = $row["dateCreate"];
+                          $price      = $row["price"];
+                          $category   = $row['category'];
+                          $quantity   = $row['quntity'];
+                          $cnt++;
+                       ?>
+                  <tr>
+                    <th scope="row"><?= $cnt?></th>
+                    <td><?= $title?></td>
+                    <td><?= $category?></td>
+                    <td><?= $quantity?></td>
+                  </tr>
+                <?php } ?>
+                </tbody>
+              </table>
+
+
+              
+
+              
+
+            </div>
+  </section>
 <!-- 
-    <footer class="card-footer rounded-bottom rounded-pill text-light" style="background-color: #613C2D;">
-       <h3 class="pt-3 ps-5 fs-5"> Copyright © 2022. All rights reserved.</h3>
-    </footer> -->
-      <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <footer class="card-footer rounded-bottom rounded-pill text-light" style="background-color: #613C2D;">
+    <h3 class="pt-3 ps-5 fs-5"> Copyright © 2022. All rights reserved.</h3>
+  </footer> -->
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="assets/js/scripte.js"></script>
 
 </body>

@@ -43,6 +43,24 @@ function sell(id)
 
 
 
+$(document).ready(function(){
+    console.log('dl');
+    $('#search').keyup(function(){
+      var x = $(this).val();
+
+
+      $.ajax({
+          url:"views/search.php",
+          method:"post",
+          data:{search:x},
+          dataType:"text",
+          success:function(data)
+          {
+              $('#readBook').html(data);
+          }
+        });
+    });
+});
 
 
 
@@ -53,9 +71,3 @@ function sell(id)
 
 
 
-// {
-//     document.getElementById("formTask").reset();
-//     document.getElementById("buttonCu").innerHTML = `	
-//         <input type="submit"data-bs-dismiss="modal" class="btn btn-danger rounded-3 w-25 "  value="Cancel">
-//         <input type="submit" id="sumbit"  class="btn btn-success rounded-3 w-25" name="save" value="Save">`
-// }

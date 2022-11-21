@@ -62,7 +62,6 @@
                         style="color: #2233f0;">Sign in</a></p>
                     <!-- <a href="!" class="small text-muted">Terms of use.</a>
                     <a href="#!" class="small text-muted">Privacy policy</a> -->
-
                   </form>
 
                 </div>
