@@ -82,10 +82,8 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Books</h5>
                         <span class="h2 font-weight-bold mb-0"><?php echo $books ;?></span>
                       </div>
-                      <div class="col-auto">
-                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i class="fas fa-chart-bar"></i>
-                        </div>
+                      <div class="col-auto" style="font-size: 2rem ;" >
+                          <i class="fa fa-book"></i>
                       </div>
                     </div>
                     
@@ -100,16 +98,11 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Qnt seles</h5>
                         <span class="h2 font-weight-bold mb-0"><?php echo $qnt ;?></span>
                       </div>
-                      <div class="col-auto">
-                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <!-- <i class="fas fa-chart-pie"></i> -->
-                        </div>
+                      <div class="col-auto" style="font-size: 2rem ;" >
+                          <i class="fa fa-book"></i>
                       </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-muted text-sm">
-                      <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                      <span class="text-nowrap">Since last week</span>
-                    </p> -->
+                    
                   </div>
                 </div>
               </div>
@@ -121,16 +114,10 @@
                         <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
                         <span class="h2 font-weight-bold mb-0"><?php echo $selling ;?></span>
                       </div>
-                      <div class="col-auto">
-                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i class="fas fa-users"></i>
-                        </div>
+                      <div class="col-auto" style="font-size: 2rem ;" >
+                          <i class="fa fa-book"></i>
                       </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-muted text-sm">
-                      <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
-                      <span class="text-nowrap">Since yesterday</span>
-                    </p> -->
                   </div>
                 </div>
               </div>
@@ -140,42 +127,40 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Perform</h5>
                         <span class="h2 font-weight-bold mb-0">49,65%</span>
                       </div>
-                      <div class="col-auto">
-                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                          <i class="fas fa-percent"></i>
-                        </div>
+                      <div class="col-auto" style="font-size: 2rem ;" >
+                          <i class="fa fa-book"></i>
                       </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-muted text-sm">
-                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                      <span class="text-nowrap">Since last month</span>
-                    </p> -->
                   </div>
                 </div>
               </div>
               <!-- Page content -->
             </div>
             
-            <div class="d-flex justify-content-around flex-wrap">
-              <table class="table bg-light  " style="width: 40rem ;">
+            <div class="d-flex justify-content-around ">
+              <table class="table bg-light " style="width: 40rem ;">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Quantiy</th>
                     <th scope="col">Category</th>
+                    <th scope="col">date</th>
+                    <th scope="col">price</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php 
                   $cnt = 0 ;
+                  $id = $_SESSION['admin']['id'];
                     $qry = "SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
-                            INNER JOIN languag l ON l.id  = b.LanguagID 
-                            INNER JOIN category c ON c.id = b.categoryID WHERE b.adminID = ".$_SESSION['admin']['id'];
+                    INNER JOIN languag l ON l.id  = b.LanguagID 
+                    INNER JOIN category c ON c.id = b.categoryID WHERE b.adminID = $id
+                    ORDER  by title ASC ";
 
                     $result = mysqli_query($GLOBALS['con'],$qry);
                         while($row = mysqli_fetch_assoc($result))
@@ -190,8 +175,10 @@
                   <tr>
                     <th scope="row"><?= $cnt?></th>
                     <td><?= $title?></td>
-                    <td><?= $category?></td>
                     <td><?= $quantity?></td>
+                    <td><?= $category?></td>
+                    <td><?= $date?></td>
+                    <td><?= $price?> MAD</td>
                   </tr>
                 <?php } ?>
                 </tbody>

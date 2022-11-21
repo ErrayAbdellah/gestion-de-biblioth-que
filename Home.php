@@ -91,7 +91,7 @@ if(!isset($_SESSION['admin']))
         </div>
       
         <div class="px-5 pt-5">
-          <input type="text" class="bg-white border-0 rounded-pill " name="search" id="search"  style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
+          <input type="text" class="form-control rounded-pill ps-3 " name="search" id="search"  style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
           <!-- <input type="submit" class="btn btn-light rounded-pill" name="search" placeholder="search"> -->
         </div>
