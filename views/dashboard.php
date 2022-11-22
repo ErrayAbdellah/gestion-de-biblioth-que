@@ -39,7 +39,7 @@
     <div class="container-fluid ">
         <div class="">
         <a class="navbar-brand" href="../Home.php">
-            <img src="../images/Logo_.png" alt="" width="100" height="50" class="d-inline-block ">
+            <img src="../images/logo_.png" alt="" width="100" height="50" class="d-inline-block ">
         </a>
         </div>
 
@@ -50,8 +50,23 @@
         </button>
 
 
-        <div class="collapse navbar-collapse"  id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;">
+        <div class="collapse navbar-collapse bg-dark"  id="navbarScroll">
+        
+        </div>
+    </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-light shadow">
+  <div class="container-fluid">
+  <div class="">
+        <a class="navbar-brand" href="../Home.php">
+            <img src="../images/logo_.png" alt="" width="100" height="50" class="d-inline-block ">
+        </a>
+        </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto my-2 my-lg-0  " style="--bs-scroll-height: 100px;">
             <li class="nav-item">
             <a class="nav-link active text-white  " aria-current="page" href="../Home.php">Home</a>
             </li>
@@ -71,10 +86,9 @@
             </ul>
             </li>
         </ul>
-        </div>
     </div>
-    </nav>
-   
+  </div>
+</nav>
     <section class="h-100 " style=" padding-top: 1rem ;">
     <div class=" d-flex flex-wrap justify-content-center ">
               <div class="m-2 me-2" style="width: 16rem;">
@@ -143,9 +157,9 @@
               <!-- Page content -->
             </div>
             
-            <div class="d-flex justify-content-around ">
+            <div class="d-flex justify-content-around overflow-scroll csrl " style="height:20rem;">
               <table class="table bg-light " style="width: 40rem ;">
-                <thead class="thead-dark">
+                <thead class="thead-dark" >
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>

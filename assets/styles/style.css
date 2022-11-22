@@ -78,3 +78,8 @@ body{
 {
   width: 3rem;
 }
+
+.csrl::-webkit-scrollbar
+{
+    display: none;
+}

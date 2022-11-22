@@ -6,10 +6,9 @@ unset($_SESSION["errorLogin"]) ;
 
 //include('../database/connect.php');
 
-if(isset($_POST['signIn']))  {
-    signIn() ;
+if(isset($_POST['signIn']))    signIn() ;
  
-}       
+   
 
 if(isset($_POST['signUp']))         signUp() ;
 if(isset($_POST['addNewBook']))     addNewBook() ;
