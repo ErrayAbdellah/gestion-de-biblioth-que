@@ -1,4 +1,6 @@
-<?php include('views/scripte.php') ?>
+<?php include('views/scripte.php') ;
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +27,11 @@
 
               <div class=" align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
+                  <?php if(isset($_SESSION['errorLogin'])) :  ?>
+                      <div class="alert alert-danger text-center">
+                          <?=  $_SESSION["errorLogin"] ;?>
+                      </div>
+                  <?php endif ;  ?>
 
                   <form  method="post" data-parsley-validate>
 

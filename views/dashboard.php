@@ -12,8 +12,11 @@
         $books      = mysqli_fetch_column(mysqli_query($con,$qryBooks));
         $selling    = mysqli_fetch_column(mysqli_query($con,$qrySelling));
         $qnt        = mysqli_fetch_column(mysqli_query($con,$qryQnt));
+        if($qnt <=0)
+        {
+          $qnt = 0;
+        }
 
-      // $qnt = 12;
     
 ?>
 

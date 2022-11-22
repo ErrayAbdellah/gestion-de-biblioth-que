@@ -77,7 +77,7 @@ if(!isset($_SESSION['admin']))
               <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['admin']['name']; ?></h1> 
             </div>
 
-              <div class=" text-break mt-5">
+              <div class=" text-break mt-xl-4 mt-sm-2">
                 <h4 class="text-light ">Books guide in 
                   <span class="tit">childhood</span>
                    and amusement in 
@@ -90,12 +90,12 @@ if(!isset($_SESSION['admin']))
          
         </div>
       
-        <div class="px-5 pt-5">
+        <!-- <div class="px-5 pt-5"> -->
+          <div class="d-flex justify-content-between flex-wrap mt-5">
           <input type="text" class="form-control rounded-pill ps-3 " name="search" id="search"  style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
           <!-- <input type="submit" class="btn btn-light rounded-pill" name="search" placeholder="search"> -->
-        </div>
-        <div class="d-flex justify-content-end mt-5">
+        
         <button type="submit" class="btn btn-light rounded-pill" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="clearmodel()"> Add new book <i class="fa fa-plus "></i></button>
       </div>
       </div>
@@ -103,8 +103,10 @@ if(!isset($_SESSION['admin']))
      
       <br>
       <hr>
-      <?php if (isset($_SESSION['message'])): ?>
-          <div class="alert alert-green alert-dismissible fade show">
+      <?php
+      if(isset($_SESSION['message'])): ?>
+         <div class="d-flex justify-content-center">
+         <div class="alert alert-<?=$_SESSION["addition"];?> w-50 border-rounded text-center">
               <strong>Success!</strong>
               <?php
               echo $_SESSION['message'];
@@ -112,35 +114,13 @@ if(!isset($_SESSION['admin']))
               ?>
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
-      <?php endif ?>
+         </div>
+         
+      <?php endif ; ?>
       
-       <section class="container d-flex justify-content-around flex-wrap align-content-start py-5 " id="readBook">
+       <section class="container d-flex justify-content-around flex-wrap align-content-start py-3 " id="readBook">
       
         <?php echo getBooks() ; ?>
-      
-    
-        <!-- <div class="cards ">
-          <div class="card shadow rounded-3">
-            <div class="p-auto d-flex justify-content-center" style="height: 10rem ;">
-              <img class="card-img-top w-50" src="images/imageTest/book1.jpg" alt="Company logo">
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card hfhfhrhrhrhhrhrrtle</h5>
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light"><i class="fa fa-user"       style="font-size:20px;"></i>   Author     </li>
-                <li class="list-group-item list-group-item-light"><i class="fa fa-language"   style="font-size:20px;"></i>   Arab       </li>
-                <li class="list-group-item list-group-item-light"><i class="fa fa-map-marker" style="font-size:20px;"></i>   Maroc      </li>
-                <li class="list-group-item list-group-item-light"><i class="fa fa-calendar"   style="font-size:20px;"></i>   2022-12-12 </li>
-                <li class="list-group-item list-group-item-light"><i class="fa fa-money"      style="font-size:20px;"></i>   120 MAD    </li>
-              </ul>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-              <button type="submit" class="btn btn-danger rounded-pill" id="left-panel-link" >Delete</button>
-              <button type="button" class="btn btn-dark rounded-pill"data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="right-panel-link">Update</button>
-            </div>
-          </div>          
-        </div>-->
-
       </section> 
      
       <footer class="card-footer rounded-bottom rounded-pill" style="background-color: #613C2D;">

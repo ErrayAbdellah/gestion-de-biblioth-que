@@ -2,10 +2,15 @@
 <?php 
 session_start();
 $con = mysqli_connect("localhost" , "root" , "" ,"library");
+unset($_SESSION["errorLogin"]) ;
 
 //include('../database/connect.php');
 
-if(isset($_POST['signIn']))         signIn() ;
+if(isset($_POST['signIn']))  {
+    signIn() ;
+ 
+}       
+
 if(isset($_POST['signUp']))         signUp() ;
 if(isset($_POST['addNewBook']))     addNewBook() ;
 if(isset($_POST['delete']))     delete() ;
@@ -25,12 +30,13 @@ function signIn()
     {
         $_SESSION['admin'] = $qry;
 
-        var_dump($_SESSION['admin']['id']);
+        //var_dump($_SESSION['admin']['id']);
         header('Location:  Home.php') ;
     }
     else
     {
-        echo "Nooooooooooooo";
+       $_SESSION['errorLogin'] = 'User is not registered <br> !! Please recheck email or password' ;
+    //   return "check password !!!" ;
     }
 }
 
@@ -82,13 +88,18 @@ function addNewBook()
                     VALUES ('$title','$state','$date',$price,$admin,$quantity,'$language',$category,'$author','$newImageName')" ;
                     mysqli_query($GLOBALS['con'],$qry);
                     
-                    $_SESSION['message'] = "Task has been added successfully !";
+                    $_SESSION['message'] = "book has been added successfully !!! !";
+                    $_SESSION["addition"] = "success";
                     //header("location: Home.php"); 
                     
                 }else
                 {
                     echo "error pictur not found";
                 }
+            }else
+            {
+                $_SESSION['message'] = "Sorry ! this picture if to latge !";
+                $_SESSION["addition"] = "warning";
             }
 
         }else{
@@ -208,19 +219,19 @@ function update()
                     `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
                     mysqli_query($GLOBALS['con'],$qry);
                     $_SESSION['message'] = "Task has been updated successfully !";
-                    header('location: Home.php');
+                    // header('location: Home.php');
                     
                 
                 }else
                 {
                     $_SESSION['message']  = "Sorry ! this not picture," ;
-                    header("location: Home.php"); 
+                    // header("location: Home.php"); 
                 }
 
             }else
             {  
                 $_SESSION['message']  = "Sorry ! this picture if to latge," ;
-                header("location: Home.php"); 
+                // header("location: Home.php"); 
             }
         }
         else
@@ -229,7 +240,7 @@ function update()
                     `categoryID`='$category',`author`='$author' WHERE id = ". $id ;
             mysqli_query($GLOBALS['con'],$qryy);
             $_SESSION['message'] = "Task has been updated successfully !";
-            header('location: Home.php');
+            // header('location: Home.php');
         }
     
    
@@ -257,10 +268,19 @@ function sell()
 
     $qnt    = $_POST['qnt'] ;
     $book   = $_POST['idBookSell'] ; 
-    $qry    = "UPDATE books SET quntity = (quntity - $qnt) WHERE id = $book";
-    $qry2   = "INSERT INTO sell( bookID,quantity,dateSell) VALUES ($book,$qnt,'$dateSell')";
+    $checkQnt    = "SELECT quntity FROM books WHERE id = $book";
+    $result =  mysqli_fetch_assoc(mysqli_query($GLOBALS['con'],$checkQnt));
+    
+    if($result['quntity']>=$qnt)
+    {
+        $qry    = "UPDATE books SET quntity = (quntity - $qnt) WHERE id = $book";
+        $qry2   = "INSERT INTO sell( bookID,quantity,dateSell) VALUES ($book,$qnt,'$dateSell')";
+        
+        mysqli_query($GLOBALS['con'],$qry);
+        mysqli_query($GLOBALS['con'],$qry2);
+    }else{
+        header('location: Home.php');
 
-    mysqli_query($GLOBALS['con'],$qry);
-    mysqli_query($GLOBALS['con'],$qry2);
+    }
 }
 ?>
