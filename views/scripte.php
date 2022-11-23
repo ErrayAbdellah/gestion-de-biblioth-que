@@ -47,7 +47,7 @@ function signUp()
     $date = $_POST['dateId'];
     $email = trim(strtolower($_POST['email']));
     $password = md5($_POST['passxord']);
-    $qry = "INSERT INTO admin(name ,lastName, email ,pasword ,dateAdmin) VALUES ('$nama','$date','$email','$password','$LastNama')";
+    $qry = "INSERT INTO admin(name ,lastName,dateAdmin ,email ,pasword ) VALUES ('$nama','$LastNama','$date','$email','$password')";
     mysqli_query($GLOBALS['con'],$qry);
 }
 
@@ -249,15 +249,12 @@ function delete()
 {
 
 
-        // $img     = "";
-        // $imgpath = "/img/".$img;
-        // unlink($imgpath);
 
     $id = $_POST['idUpdate'];
     $qry = "DELETE FROM `books` WHERE id = ".$id ;
     mysqli_query($GLOBALS['con'],$qry);
     $_SESSION['message'] = "Task has been deleted successfully !";
-    header('location: Home.php');
+   // header('location: Home.php');
     
 }
 

@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    
     /* height: 100vh; */
   }
 body{
@@ -46,10 +47,18 @@ body{
   margin-right: 7rem;
   margin-left: 7rem;
   background-image: url(../../images/imageTest/book3.png);
-  height: 20rem;
+  height: 23rem;
   background-size: cover;
   background-position: center;
-  padding-right: 2%;
+  width: auto;
+  /* padding-right: 2%; */
+}
+
+@media (max-width: 639px){
+  #cove{
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
 }
 
 #textCov

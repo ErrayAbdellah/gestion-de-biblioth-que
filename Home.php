@@ -57,8 +57,8 @@ if(!isset($_SESSION['admin']))
                   Profile
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">My Account</a></li>
-                  <li><hr class="dropdown-divider"></li>
+                  <!-- <li><a class="dropdown-item" href="#">My Account</a></li>
+                  <li><hr class="dropdown-divider"></li> -->
                   <li><a class="dropdown-item" href="views/logOut.php">logout</a></li>
                 </ul>
               </li>
@@ -70,9 +70,9 @@ if(!isset($_SESSION['admin']))
 
       <div  class="mt-3 w-100">
         <div class="d-flex  rounded-pill" id="cove">
-          <div class="px-5" id="textCov">
+          <div class="" id="textCov">
 
-            <div class="d-flex flex-wrap pt-4 mt-3" >
+            <div class="d-flex flex-wrap pt-4 mt-3 ps-5" >
               <h1 class="text-light me-4" >Welcome </h1> 
               <h1 style="color:#D09A5E ;"><?php   echo $_SESSION['admin']['name']; ?></h1> 
             </div>
@@ -91,7 +91,7 @@ if(!isset($_SESSION['admin']))
         </div>
       
         <!-- <div class="px-5 pt-5"> -->
-          <div class="d-flex justify-content-between flex-wrap mt-5">
+          <div class="d-flex justify-content-around flex-wrap mt-5">
           <input type="text" class="form-control rounded-pill ps-3 " name="search" id="search"  style="width: 20rem; height: 2.5rem;" placeholder="Search" required>
 
           <!-- <input type="submit" class="btn btn-light rounded-pill" name="search" placeholder="search"> -->
@@ -123,11 +123,8 @@ if(!isset($_SESSION['admin']))
         <?php echo getBooks() ; ?>
       </section> 
      
-      <footer class="card-footer rounded-bottom rounded-pill" style="background-color: #613C2D;">
-       <h3 class="pt-3 ps-5 fs-5 text-light"> Copyright © 2022. All rights reserved.</h3>
-      </footer>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -208,7 +205,7 @@ if(!isset($_SESSION['admin']))
         <div class="modal-footer d-flex justify-content-between" id="btns">
           <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <input type="hidden" name="idUpdate" id="idUpdate">
-          <input type="hidden" name="imgUpdate" id="imgUpdate" >
+            <input type="hidden" name="imgUpdate" id="imgUpdate" >
             <input type="submit" class="btn btn-success rounded-pill d-none" name="addNewBook" id='addNewBook' value="ADD NEW BOOK">
             <div id="btnss" class="d-none">
             <input type="submit" class="btn btn-danger rounded-pill me-1" id="left-panel-link" name="delete" value ="delete">
@@ -237,8 +234,8 @@ if(!isset($_SESSION['admin']))
           </div>
           <input type="hidden" name="idBookSell" id="idBookSell" >
           
-        
-        <!--end content model -->
+          
+          <!--end content model -->
         </div>
         <div class="modal-footer d-flex justify-content-between" id="btns">
           <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -248,6 +245,9 @@ if(!isset($_SESSION['admin']))
     </div>
   </div>
 </div>
+<footer class="card-footer rounded-bottom rounded-pill" style="background-color: #613C2D; margin-top: 10rem;">
+ <h3 class="pt-3 ps-5 fs-5 text-light"> Copyright © 2022. All rights reserved.</h3>
+</footer>
 
 <!-- link ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

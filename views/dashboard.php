@@ -35,7 +35,7 @@
 </head>
 <body class="back">
 
-    <nav class="navbar navbar-expand-lg shadow" style="height: 4rem; ">
+    <!-- <nav class="navbar navbar-expand-lg shadow" >
     <div class="container-fluid ">
         <div class="">
         <a class="navbar-brand" href="../Home.php">
@@ -50,22 +50,8 @@
         </button>
 
 
-        <div class="collapse navbar-collapse bg-dark"  id="navbarScroll">
-        
-        </div>
-    </div>
-    </nav>
-    <nav class="navbar navbar-expand-lg bg-light shadow">
-  <div class="container-fluid">
-  <div class="">
-        <a class="navbar-brand" href="../Home.php">
-            <img src="../images/logo_.png" alt="" width="100" height="50" class="d-inline-block ">
-        </a>
-        </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fa-solid fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+        <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto my-2 my-lg-0  " style="--bs-scroll-height: 100px;">
             <li class="nav-item">
             <a class="nav-link active text-white  " aria-current="page" href="../Home.php">Home</a>
@@ -87,9 +73,44 @@
             </li>
         </ul>
     </div>
+       
+    </div>
+    </nav> -->
+    <nav class="navbar navbar-expand-lg bg-light ">
+  <div class="container-fluid">
+  <div class="">
+        <a class="navbar-brand" href="../Home.php">
+            <img src="../images/logo_.png" alt="" width="100" height="50" class="d-inline-block ">
+        </a>
+        </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto my-2 my-lg-0  " style="--bs-scroll-height: 100px;">
+            <li class="nav-item">
+            <a class="nav-link active  text-dark " aria-current="page" href="../Home.php">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active text-dark  " aria-current="page" href="dashboard.php">Dashboard</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navProfile" >
+        <li class="nav-item dropdown pe-4">
+            <a class="nav-link dropdown-toggle text-dark  me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Profile
+            </a>
+            <ul class="dropdown-menu text-dark">
+                <!-- <li><a class="dropdown-item" href="#">My Account</a></li> -->
+                <!-- <li><hr class="dropdown-divider"></li> -->
+                <li><a class="dropdown-item" href="logOut.php">logout</a></li>
+            </ul>
+            </li>
+        </ul>
+    </div>
   </div>
 </nav>
-    <section class="h-100 " style=" padding-top: 1rem ;">
+    <section class="h-100 " style=" padding-top: 5rem ;">
     <div class=" d-flex flex-wrap justify-content-center ">
               <div class="m-2 me-2" style="width: 16rem;">
                 <div class="card card-stats mb-4 mb-xl-0">
@@ -139,31 +160,15 @@
                 </div>
               </div>
 
-              <div class="m-2 " style="width: 16rem;">
-                <div class="card card-stats mb-4 mb-xl-0">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Perform</h5>
-                        <span class="h2 font-weight-bold mb-0">49,65%</span>
-                      </div>
-                      <div class="col-auto" style="font-size: 2rem ;" >
-                          <i class="fa fa-book"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Page content -->
             </div>
             
-            <div class="d-flex justify-content-around overflow-scroll csrl " style="height:20rem;">
+            <div class="d-flex justify-content-around overflow-scroll csrl " style="height:25rem; padding-top:4rem">
               <table class="table bg-light " style="width: 40rem ;">
                 <thead class="thead-dark" >
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Quantiy</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Category</th>
                     <th scope="col">date</th>
                     <th scope="col">price</th>
@@ -200,12 +205,6 @@
                 <?php } ?>
                 </tbody>
               </table>
-
-
-              
-
-              
-
             </div>
   </section>
 <!-- 
