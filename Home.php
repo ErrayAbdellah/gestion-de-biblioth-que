@@ -107,16 +107,18 @@ if(!isset($_SESSION['admin']))
       if(isset($_SESSION['message'])): ?>
          <div class="d-flex justify-content-center">
          <div class="alert alert-<?=$_SESSION["addition"];?> w-50 border-rounded text-center">
-              <strong>Success!</strong>
+              
               <?php
               echo $_SESSION['message'];
               unset($_SESSION['message']);
+              unset( $_SESSION["addition"]);
               ?>
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
          </div>
          
       <?php endif ; ?>
+      
       
        <section class="container d-flex justify-content-around flex-wrap align-content-start py-3 " id="readBook">
       

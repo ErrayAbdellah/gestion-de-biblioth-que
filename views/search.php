@@ -1,7 +1,8 @@
 <?php
    // session_start();
 include('scripte.php');
-    $con = mysqli_connect("localhost","root","","library");
+
+  
 
     $qry ="SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
             INNER JOIN languag l ON l.id  = b.LanguagID 

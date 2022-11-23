@@ -1,12 +1,12 @@
 <?php
 
-    $con = mysqli_connect("localhost","root","","library");
+    include('connect.php');
     session_start();
    
     
         $id         = $_SESSION['admin']['id'] ;
         $con        = $GLOBALS['con'];
-        $qryBooks   = "SELECT COUNT(*) FROM books WHERE adminID = $id";
+        $qryBooks   = "SELECT COUNT(*) FROM books WHERE adminID = $id and quntity > 0";
         $qrySelling = "SELECT COUNT(*) FROM sell WHERE bookID in (SELECT id FROM books WHERE adminID = $id)";
         $qryQnt     = "SELECT SUM(quantity) FROM sell WHERE bookID in (SELECT id FROM books WHERE adminID = $id)";
         $books      = mysqli_fetch_column(mysqli_query($con,$qryBooks));
@@ -35,47 +35,9 @@
 </head>
 <body class="back">
 
-    <!-- <nav class="navbar navbar-expand-lg shadow" >
-    <div class="container-fluid ">
-        <div class="">
-        <a class="navbar-brand" href="../Home.php">
-            <img src="../images/logo_.png" alt="" width="100" height="50" class="d-inline-block ">
-        </a>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        
-        <i class="fa-solid fa-bars"></i>
-        <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-      
-        <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto my-2 my-lg-0  " style="--bs-scroll-height: 100px;">
-            <li class="nav-item">
-            <a class="nav-link active text-white  " aria-current="page" href="../Home.php">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link active  text-white" aria-current="page" href="dashboard.php">Dashboard</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav navProfile" >
-        <li class="nav-item dropdown pe-4">
-            <a class="nav-link dropdown-toggle text-white me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profile
-            </a>
-            <ul class="dropdown-menu ">
-                <li><a class="dropdown-item" href="#">My Account</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="logOut.php">logout</a></li>
-            </ul>
-            </li>
-        </ul>
-    </div>
+  
        
-    </div>
-    </nav> -->
+
     <nav class="navbar navbar-expand-lg bg-light ">
   <div class="container-fluid">
   <div class="">

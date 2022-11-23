@@ -1,7 +1,7 @@
 
 <?php 
+include('connect.php');
 session_start();
-$con = mysqli_connect("localhost" , "root" , "" ,"library");
 unset($_SESSION["errorLogin"]) ;
 
 //include('../database/connect.php');
@@ -29,7 +29,7 @@ function signIn()
     {
         $_SESSION['admin'] = $qry;
 
-        //var_dump($_SESSION['admin']['id']);
+       
         header('Location:  Home.php') ;
     }
     else
@@ -87,24 +87,26 @@ function addNewBook()
                     VALUES ('$title','$state','$date',$price,$admin,$quantity,'$language',$category,'$author','$newImageName')" ;
                     mysqli_query($GLOBALS['con'],$qry);
                     
-                    $_SESSION['message'] = "book has been added successfully !!! !";
+                    $_SESSION['message'] = "<strong>Success!</strong> book has been added successfully !!! !";
                     $_SESSION["addition"] = "success";
-                    //header("location: Home.php"); 
+                    
                     
                 }else
                 {
-                    echo "error pictur not found";
+                  
+                    $_SESSION['message'] = "Sorry ! pictur not found !";
+                    $_SESSION["addition"] = "danger";
                 }
             }else
             {
-                $_SESSION['message'] = "Sorry ! this picture if to latge !";
+                $_SESSION['message'] = "Sorry ! this picture if to large !";
                 $_SESSION["addition"] = "warning";
             }
 
         }else{
                
-            $msg = "Sorry ! this picture if to latge," ;
-            header("location: Home.php?error=$msg"); 
+            $_SESSION['message'] = "error";
+            $_SESSION["addition"] = "warning";
         }
     }
 
@@ -115,7 +117,7 @@ function getBooks()
 {
     $qry =mysqli_query($GLOBALS['con'],"SELECT b.*, l.name AS 'language',c.name AS 'category' FROM books b 
                                         INNER JOIN languag l ON l.id  = b.LanguagID 
-                                        INNER JOIN category c ON c.id = b.categoryID WHERE  b.adminID = ".$_SESSION['admin']['id']);
+                                        INNER JOIN category c ON c.id = b.categoryID WHERE  b.quntity > 0 and  b.adminID = ".$_SESSION['admin']['id']);
 
    
     while($row = mysqli_fetch_assoc($qry))
@@ -126,13 +128,12 @@ function getBooks()
         $state      = $row["state"];
         $date       = $row["dateCreate"];
         $language   = $row["language"];
-        $language2  =$row["LanguagID"];
+        $language2  = $row["LanguagID"];
         $price      = $row["price"];
         $category   = $row['category'];
         $quantity   = $row['quntity'];
         $image      = $row['image'];
-        // var_dump($row);
-        // echo "***************************************************************";
+       
         ?>
                 <div class="cards my-5 mx-3 ">
                     <div class="card shadow rounded-3">
@@ -169,9 +170,6 @@ function getBooks()
             <?php
     }
 }
-
-
-
 
 function update() 
 {
@@ -210,26 +208,29 @@ function update()
                     else{
                         $newImageName = substr($image,-3);
                     }
-                    
+                    echo $newImageName ; 
                     $new_img = $newImageName.$imgLower ;
                     $ImageUpload = 'assets/IMG/'.$new_img;
                     move_uploaded_file($tmp_name,$ImageUpload);    
                     $qry = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
                     `categoryID`='$category',`author`='$author',`image`='$new_img' WHERE id = ". $id ;
                     mysqli_query($GLOBALS['con'],$qry);
-                    $_SESSION['message'] = "Task has been updated successfully !";
+                    $_SESSION['message'] = "<strong>Success!</strong> Task has been updated successfully !";
+                    $_SESSION["addition"] = "success";
                     // header('location: Home.php');
                     
                 
                 }else
                 {
+                    $_SESSION["addition"] = "danger" ;
                     $_SESSION['message']  = "Sorry ! this not picture," ;
                     // header("location: Home.php"); 
                 }
 
             }else
             {  
-                $_SESSION['message']  = "Sorry ! this picture if to latge," ;
+                $_SESSION["addition"] = "danger" ;
+                $_SESSION['message']  = "Sorry ! this picture if to large," ;
                 // header("location: Home.php"); 
             }
         }
@@ -238,8 +239,8 @@ function update()
             $qryy = "UPDATE `books` SET `title`='$title',`state`='$state',`dateCreate`='$date',`price`='$price',`quntity`='$quantity',`LanguagID`='$language',
                     `categoryID`='$category',`author`='$author' WHERE id = ". $id ;
             mysqli_query($GLOBALS['con'],$qryy);
-            $_SESSION['message'] = "Task has been updated successfully !";
-            // header('location: Home.php');
+            $_SESSION["addition"] = "success";
+            $_SESSION['message'] = "<strong>Success!</strong>book has been updated successfully !";
         }
     
    
@@ -253,7 +254,10 @@ function delete()
     $id = $_POST['idUpdate'];
     $qry = "DELETE FROM `books` WHERE id = ".$id ;
     mysqli_query($GLOBALS['con'],$qry);
-    $_SESSION['message'] = "Task has been deleted successfully !";
+    $_SESSION["addition"] = "success";
+    $_SESSION['message'] = "<strong>Success!</strong>Task has been deleted successfully !";
+
+
    // header('location: Home.php');
     
 }
